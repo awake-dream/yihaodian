@@ -21,7 +21,6 @@
   /*兼容IE6*/
   *zoom: 1;
 }
-
 @mixin whc() {
   width: 1000px;
   height: 100%;
@@ -136,9 +135,12 @@ $color: #ff4040;
     .nav-left {
       display: flex;
       i {
+        margin-top: 1px;
+        margin-right: 5px;
         font-size: 14px;
         color: $color;
         font-weight: bold;
+        vertical-align: middle;
       }
       a {
         color: #333;
@@ -296,6 +298,7 @@ $color: #ff4040;
               color: #333;
               font-size: 12px;
               padding-left: 18px;
+              text-align: left;
               &:nth-child(6n) {
                 border-right: none;
               }
@@ -306,10 +309,11 @@ $color: #ff4040;
                 white-space: nowrap;
               }
               dd {
+                width: 50%;
                 float: left;
                 line-height: 25px;
-                &:nth-child(even) {
-                  margin-right: 30px;
+                &:hover{
+                  color: $color;
                 }
               }
             }

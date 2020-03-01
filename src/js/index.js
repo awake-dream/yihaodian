@@ -119,7 +119,6 @@ function initSeckill() {
   function setTime(){
     // 获取一次返回值
       let obj = getTime(preDate, new Date());
-      console.log(obj)
       oHour.innerText = obj.hh;
       oMinute.innerText = obj.mm;
       oSecond.innerText = obj.ss;
