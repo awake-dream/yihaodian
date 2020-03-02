@@ -9,8 +9,6 @@ $(function () {
   initMain()
 
 
-
-
 });
 
 function initMain() {
@@ -37,7 +35,6 @@ function initMain() {
       function pageHtml() {
         var html = "";
         res.forEach((item, index) => {
-          item.id = index;
           html += `        
           <li>
           <img src="${item.img}" alt="">
@@ -58,42 +55,38 @@ function initMain() {
         $(this).data("data-img", $(this).children("img").prop("src"));
         $(this).data("data-money", parseInt($(this).children(".money").text().replace("¥", "")));
         $(this).data("data-info", $(this).children(".mainTitle").text());
+        $(this).data("data-num", 0);
+      })  
+
+     
+      
+
+      // 在用户点击 加入购物车 将数据在 localStorage 保存下来
+      $(".main-list li span").click(function () {
+        var listArr = JSON.parse(localStorage.getItem("list") || "[]");
+        var flag = true;
+
+        listArr.forEach((item) => {
+          if (item.id == $(this).parent().data("data-id")) {
+            item.num =  item.num + 1;
+            flag = false;
+          }
+        });
+
+        var obj = {
+          id: $(this).parent().data("data-id"),
+          img: $(this).parent().data("data-img"),
+          money: $(this).parent().data("data-money"),
+          info: $(this).parent().data("data-info"),
+          num: $(this).parent().data("data-num")
+        }
+
+        if(flag){
+          listArr.push(obj);
+        }
+        
+        localStorage.setItem("list", JSON.stringify(listArr));
       })
-
-      // var listArr = JSON.parse(localStorage.getItem("list") || "[]");
-
-      // var num = 0;
-      // // 在用户点击 加入购物车 将数据在 localStorage 保存下来
-      // $(".main-list li span").click(function () {
-
-      //   var obj = {
-      //     id: $(this).parent().data("data-id"),
-      //     img: $(this).parent().data("data-img"),
-      //     money: $(this).parent().data("data-money"),
-      //     info: $(this).parent().data("data-info"),
-      //     num: $(this).parent().data("data-num")
-      //   }
-
-      //   var flag = true;
-      //   listArr.forEach((item) => {
-      //     if (item.id == $(this).parent().data("data-id")) {
-      //       // num = parseInt($(this).parent().data("data-num")) + 1;
-      //       num++
-      //       console.log(num)
-      //       $(this).parent().data("data-num", num);
-      //       flag = false;
-      //     } else {
-      //       $(this).parent().data("data-num", 1);
-      //       // item.num = 1;
-      //     }
-      //   });
-
-      //   if (flag) {
-      //     listArr.push(obj);
-      //   }
-
-      //   localStorage.setItem("list", JSON.stringify(listArr));
-      // })
 
 
     }
