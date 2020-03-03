@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的购物车-1号店,只为更好的生活</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <link rel="stylesheet" href="../fonts/index-font/iconfont.css">
+  <link rel="stylesheet" href="../css/cart.css">
+  <script src="../lib/jquery/dist/jquery.min.js"></script>
+  <script src="../js/cart.js"></script>
+</head>
+
+<body>
+
+  <div class="nav-top">
+    <div class="nav-top-in clearfix">
+      <div class="nav-left fl">
+        <i class="iconfont icon-weibiaoti-"></i>
+        <a href="javascript:;">1号店首页</a>
+      </div>
+
+      <ul class="nav-right fr">
+        <li>
+          <i class="iconfont icon-shouji"></i>
+          下载APP
+          <div>
+            <p>扫描二维码</p>
+            <p>下载1号店APP</p>
+            <img src="../images/app.png" alt="">
+          </div>
+        </li>
+        <li>
+          客户服务
+          <i class="iconfont icon-xiajiantou"></i>
+        </li>
+        <li>
+          <!-- <i class="iconfont icon-huiyuan"></i> -->
+          <i class="iconfont icon-wodedingdan"></i>
+          我的订单
+        </li>
+        <li>注册</li>
+        <li><span>Hi,登录</span></li>
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="header">
+    <div class="header-in">
+      <div class="header-title clearfix">
+        <div class="header-left fl clearfix">
+          <h1>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+          </h1>
+          <p>配送至: </p>
+          <div>
+            <a href="javascript:;">上海</a>
+            <span>|</span>
+            <a href="javascript:;">静安区</a>
+            <span>|</span>
+            <a href="javascript:;">城区</a>
+            <i class="iconfont icon-xiajiantou"></i>
+          </div>
+        </div>
+  
+        <div class="header-right fr">
+          <input type="text" placeholder="请输入关键字">
+          <i class="iconfont icon-fangdajing"></i>
+        </div>
+      </div>
+      <div class="header-list">
+        <span class="checkbox">
+          <a href="javascript:;" class="all">
+            <i class="iconfont icon-gouxuan"></i>
+          </a>
+          全选
+        </span>
+        <span class="tit"> 商品信息 </span>
+        <span class="price">单价（元） </span>
+        <span class="num"> 数量 </span>
+        <span class="total"> 小计（元） </span>
+        <span class="act">操作</span>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="cart">
+    <div class="cart-in">
+      <!-- <div class="cart-list">
+
+        <div class="cart-title">
+          <a href="javascript:;">
+            <i class="iconfont icon-gouxuan"></i>
+          </a>
+          谷高数码手机专营店
+        </div>
+
+        <div class="cart-middle clearfix">
+          <a href="javascript:;">
+            <i class="iconfont icon-gouxuan"></i>
+          </a>
+          <img src="https://img20.360buyimg.com/cms/s75x75_jfs/t1/88448/38/5811/126290/5def83cdE66fcb03f/b8a14fc191afbd8c.jpg" alt="">
+          <div class="info">
+            <a href="javascript:;">
+              小米 Redmi 红米K30 王一博同款手机 紫玉幻境 4G版 全网通8G+256G 
+            </a>
+            <p>
+              <span> 7 </span>
+              <a href="javascript:;">
+                紫玉幻境 4G版 全网通8G+256G
+              </a>
+            </p>
+          </div>
+
+          <p class="item_price fl">
+            2138.00
+          </p>
+
+          <div class="num_act fl">
+            <span> - </span>
+            <input type="text" value="1">
+            <span> + </span>
+          </div>
+
+          <div class="amount fl">
+            <div class="money">
+              2138.00
+            </div>
+            <div class="weight">
+              1.00kg
+            </div>
+          </div>
+
+          <div class="item_act fl">
+            <i class="iconfont icon-02"></i>
+            <i class="iconfont icon-lajitong"></i>
+          </div>
+
+
+        </div>
+
+        <div class="cart-amount">
+          商品总价格 : 
+          <span>¥2138</span>
+        </div>
+
+      </div>
+
+      <div class="cart-list">
+
+        <div class="cart-title">
+          <a href="javascript:;">
+            <i class="iconfont icon-gouxuan"></i>
+          </a>
+          谷高数码手机专营店
+        </div>
+
+        <div class="cart-middle clearfix">
+          <a href="javascript:;">
+            <i class="iconfont icon-gouxuan"></i>
+          </a>
+          <img src="https://img20.360buyimg.com/cms/s75x75_jfs/t1/88448/38/5811/126290/5def83cdE66fcb03f/b8a14fc191afbd8c.jpg" alt="">
+          <div class="info">
+            <a href="javascript:;">
+              小米 Redmi 红米K30 王一博同款手机 紫玉幻境 4G版 全网通8G+256G 
+            </a>
+            <p>
+              <span> 7 </span>
+              <a href="javascript:;">
+                紫玉幻境 4G版 全网通8G+256G
+              </a>
+            </p>
+          </div>
+
+          <p class="item_price fl">
+            2138.00
+          </p>
+
+          <div class="num_act fl">
+            <span> - </span>
+            <input type="text" value="1">
+            <span> + </span>
+          </div>
+
+          <div class="amount fl">
+            <div class="money">
+              2138.00
+            </div>
+            <div class="weight">
+              1.00kg
+            </div>
+          </div>
+
+          <div class="item_act fl">
+            <i class="iconfont icon-02"></i>
+            <i class="iconfont icon-lajitong"></i>
+          </div>
+
+
+        </div>
+
+        <div class="cart-amount">
+          商品总价格 : 
+          <span>¥2138</span>
+        </div>
+
+      </div> -->
+    </div>
+  </div>
+
+  <div class="tools">
+    
+  </div>
+
+
+
+</body>
+
+</html>

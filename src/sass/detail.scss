@@ -331,7 +331,6 @@ $color: #ff4040;
     }
     .main-bottom {
       width: 100%;
-      height: 800px;
       display: flex;
       justify-content: space-between;
       .main-left {
@@ -574,6 +573,7 @@ $color: #ff4040;
               font-size: 16px;
               font-weight: bold;
               border: 1px solid #ddd;
+              user-select: none;
             }
             & > div {
               float: left;
@@ -585,6 +585,7 @@ $color: #ff4040;
                 flex: 1;
                 border: 1px solid #ddd;
                 cursor: pointer;
+                outline: none;
                 i{
                   position: relative;
                   right: 3px;
@@ -642,12 +643,128 @@ $color: #ff4040;
           }
         }
       }
-
-
       .main-right {
         width: 178px;
-        background: pink;
+        border: 1px solid #eaeaea;
+        padding-bottom: 20px;
+        .cha_t{
+          line-height: 30px;
+          color: #666;
+          border-bottom: 1px solid #eaeaea;
+          background: #fcfcfc;
+          padding: 0 20px;
+          h3{
+            float: left;
+            font-size: 14px;
+          }
+          &>a{
+            float: right;
+            font-size: 12px;
+            color: #aaa;
+            &:hover{
+              color: #ff6a5a;
+            }
+          }
+        }
+        .cha_price{
+          li{
+            text-align: center;
+            margin-top: 10px;
+            img{
+              width: 120px;
+              height: 120px;
+            }
+            p{
+              width: 150px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow:ellipsis;
+              margin: 5px auto;
+            }
+            span{
+              color: #e60021;
+            }
+          }
+        }
       }
     }
+  }
+}
+
+/* 底部导航区域 */
+.ft_wrap{
+  height: 127px;
+  background: #fff;
+  margin-top: 100px;
+  .ft-in{
+    @include whc();
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    li{
+      text-align: center;
+      display: flex;
+      &>div{
+        text-align: left;
+        padding-top: 10px;
+        margin-left: 10px;
+        p{
+          font-weight: bold;
+          font-size: 16px;
+          color: #333;
+        }
+        span{
+          font-size: 14px;
+          color: #999;
+        }
+      }
+
+    }
+  }
+}
+
+/* 底部区域 */
+.footer{
+  background:#fff;
+  .footer-in{
+    @include whc();
+    padding-top: 20px;
+    dl{
+      width: 165px;
+      float: left;
+      dt{
+        font-weight: bold;
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+      dd{
+        color: #666;
+        line-height: 26px;
+        cursor: pointer;
+        &:hover{
+          color: $color;
+        }
+      }
+    }
+    div{
+      margin-left: 50px;
+      h4{
+        color: #666;
+        font-size: 14px;
+        line-height: 32px;
+        font-weight: bold;
+      }
+    }
+  }
+}
+.end{
+  padding-top: 20px;
+  text-align: center;
+  background: #fff;
+  p{
+    line-height: 26px;
   }
 }

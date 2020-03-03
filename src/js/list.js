@@ -53,13 +53,11 @@ function initMain() {
       $(".main-list li").each(function (index, ele) {
         $(this).data("data-id", index);
         $(this).data("data-img", $(this).children("img").prop("src"));
-        $(this).data("data-money", parseInt($(this).children(".money").text().replace("¥", "")));
+        $(this).data("data-money", $(this).children(".money").text().replace("¥", ""));
         $(this).data("data-info", $(this).children(".mainTitle").text());
         $(this).data("data-num", 0);
-      })  
+      })
 
-     
-      
 
       // 在用户点击 加入购物车 将数据在 localStorage 保存下来
       $(".main-list li span").click(function () {
@@ -81,6 +79,7 @@ function initMain() {
           num: $(this).parent().data("data-num")
         }
 
+        console.log(obj)
         if(flag){
           listArr.push(obj);
         }

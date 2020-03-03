@@ -11,8 +11,42 @@ $(function () {
     // 4.初始化选购区域
     initmainMlddle();
 
-
+    // 5.初始化右边随机菜单
+    initRandom();
 });
+
+
+function initRandom() {
+    $.ajax({
+        url: "../data/Llist.json",
+        type: "GET",
+        success: function (res) {
+            $(".cha_t a").click(function () {
+                var html = dome();
+
+                $(".cha_price").html(html);
+            });
+
+
+            function dome() {
+                var html = "";
+                for (let i = 0; i < res.length; i++) {
+                    var t = parseInt(Math.random() * 57);
+                    if (i < 3) {
+                        html += `
+                        <li>
+                        <img src="${res[t].img}" alt="">
+                        <p>${res[t].title}</p>
+                        <span>${res[t].money}</span>
+                        </li>`;
+                    }
+                }
+                return html;
+            }
+
+        }
+    });
+}
 
 function initmainMlddle() {
     $("#yangse a").click(function () {

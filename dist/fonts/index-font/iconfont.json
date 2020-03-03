@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "49657",
+      "name": "爱心",
+      "font_class": "02",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "287188",
+      "name": "勾选",
+      "font_class": "gouxuan",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
       "icon_id": "339044",
       "name": "菜单",
       "font_class": "caidan",
@@ -123,6 +137,13 @@
       "font_class": "shangjiantou_huaban",
       "unicode": "e63d",
       "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "12770896",
+      "name": "垃圾桶",
+      "font_class": "lajitong",
+      "unicode": "e607",
+      "unicode_decimal": 58887
     }
   ]
 }
