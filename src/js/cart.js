@@ -6,30 +6,135 @@ $(function () {
   initSelect();
 
   // 3.
-  
+  // 设置商品的数量
+  var res = $(".cart-list");
+  $(".res").text(res.length);
 
+  // 清空购物车
+  $(".all-del").click(function () {
+    alert('是否需要全部删除');
+
+    $(".cart-list").remove();
+
+    localStorage.removeItem("list");
+  });
+
+  // 设置 商品总数量
+  $(".goods_num").text(toolbarNum());
+
+  // 设置 商品总价格
+  $('.total').text("¥" + toolbarMoney() + ".00");
+
+
+  function toolbarNum() {
+    let num = 0;
+    $(".num_act").children("input").each(function (index, item) {
+      // console.log(.val())
+      num += Number($(item).val());
+    })
+    return num;
+  }
+
+  function toolbarMoney() {
+    let num = 0;
+    $(".cart-amount").children("span").each(function (index, item) {
+      num += Number($(item).text());
+    })
+    return num;
+  }
 
 })
 
-function initSelect() {
 
-  $(".all").click(function () {
+function initSelect() {
+  // 全选按钮勾选
+  $(".header-list .all").click(function () {
     $(this).toggleClass("active");
 
-    if($(this).hasClass("active")){
+    $(".cart-middle").children('.select').addClass("active");
+    $(".cart-title").children('.select').addClass("active");
 
-      $(".select").css("backgroundColor", "#ff5e5e");
-    }else{
+    $(".tools .all").toggleClass("active");
 
-      $(".select").css("backgroundColor", "#fff");
-    }
+    // $(".cart-list").children(".select").toggleClass("active");
   });
+
+  // 信息按钮勾选
+  $(".cart-middle").children('.select').click(function () {
+    $(this).toggleClass("active");
+
+    if ($(this).hasClass("active")) {
+      $(this).parents(".cart-list").children(".cart-title").children(".select").addClass("active")
+
+      // num += Number($(this).parents(".cart-middle").children(".num_act").children("input").val());
+
+      // total += Number($(this).parents(".cart-middle").next().children("span").text());
+
+    } else {
+      $(this).parents(".cart-list").children(".cart-title").children(".select").removeClass("active")
+    }
+
+    hasClass();
+
+  })
+
+
+
+
+  // 标题按钮勾选
+  $(".cart-title").children('.select').click(function () {
+    $(this).toggleClass("active");
+
+    if ($(this).hasClass("active")) {
+      $(this).parents(".cart-list").children(".cart-middle").children(".select").addClass("active")
+    } else {
+      $(this).parents(".cart-list").children(".cart-middle").children(".select").removeClass("active")
+    }
+
+    hasClass();
+  })
+
+
+
+  // 总价格按钮勾选
+  $(".tools .all").click(function () {
+    $(this).toggleClass("active");
+
+    $(".cart-middle").children('.select').addClass("active");
+    $(".cart-title").children('.select').addClass("active");
+
+    $(".header-list .all").toggleClass("active");
+  });
+
+  // 将下面判断是否被勾选封装成一个函数 好二次调用
+  function hasClass() {
+    var flag = true;
+    $(".cart-middle .select").each(function (index, item) {
+      // 当 信息菜单里面的 都被勾选时 才改变 flag 的状态
+      if ($(item).hasClass("active") === false) {
+        flag = false;
+      }
+    })
+
+    if (flag) {
+      $(".tools .all").addClass("active");
+      $(".header-list .all").addClass("active");
+    } else {
+      $(".tools .all").removeClass("active");
+      $(".header-list .all").removeClass("active");
+    }
+  }
+
 
 }
 
 
 function initCart() {
   var listArr = JSON.parse(localStorage.getItem("list") || "[]");
+  
+  if(listArr.length === 0){
+    $(".hide").show();
+  }
 
   var html = "";
   listArr.forEach(function (ele) {
@@ -114,18 +219,36 @@ function initCart() {
 
   // 增加购物车里面商品的数量
   $(".bth-up").click(function () {
+    // 设置 已选商品的数量
+    $(".goods_num").text(Number($(".goods_num").text()) + 1);
+
     var num = $(this).prev().val();
 
     num++;
     if (num > 1) {
       $(this).prevAll(".bth-down").css("color", "#666");
     }
+    // 设置商品数量
     $(this).prev().val(num);
+    // 设置商品的总价格
     toolbar();
+
+    // $(".goods_num").text(Number($(".goods_num").text()) + (++res));
+    // console.log(res)
+
+    // 页面刷新  能够获取最新的数据
+    setNum.call(this, num);
+
+    // 设置 总价格
+    $(".total").text("¥" + setTotal() + ".00");
+
   });
 
   // 减少购物车里面商品的数量
   $(".bth-down").click(function () {
+    // 设置 已选商品的数量
+    $(".goods_num").text(Number($(".goods_num").text()) - 1);
+
     var num = $(this).next().val();
     num--;
     num < 2 ? $(this).css("color", "#dfdfdf") : $(this).css("color", "#666");
@@ -134,8 +257,18 @@ function initCart() {
       return;
     }
 
+    // 设置商品数量
     $(this).next().val(num);
+    // 设置商品的总价格
     toolbar();
+
+
+    // 页面刷新  能够获取最新的数据
+    setNum.call(this, num);
+
+     // 设置 总价格
+    $(".total").text("¥" + setTotal() + ".00");
+
   });
 
   // 删除购物车商品
@@ -150,4 +283,27 @@ function initCart() {
 
     localStorage.setItem("list", JSON.stringify(newList));
   });
+
+  // 设置最新的 num 值
+  function setNum(res) {
+    for (let i = 0; i < listArr.length; i++) {
+
+      if (listArr[i].id == $(this).parents(".cart-list").attr("name")) {
+        listArr[i].num = res - 1;
+        break;
+      }
+    }
+
+    localStorage.setItem("list", JSON.stringify(listArr));
+  }
+
+
+  function setTotal() {
+    var res = 0;
+    $(".cart-amount").children("span").each((index, item) => {
+      res += Number($(item).text());
+    });
+    return res;
+  }
+
 }

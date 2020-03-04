@@ -6,8 +6,7 @@ $(function () {
   initHeaderInfo();
 
   // 3.初始化列表区域
-  initMain()
-
+  initMain();
 
 });
 
@@ -16,25 +15,42 @@ function initMain() {
     url: "../data/Llist.json",
     type: "GET",
     success: function (res) {
+      $('.M-box3').pagination({
+        pageCount: Math.ceil(res.length / 16),
+        jump: true,
+        coping: true,
+        homePage: '首页',
+        endPage: '末页',
+        prevContent: '上页',
+        nextContent: '下页',
+        callback: function (api) {
+          let curr = api.getCurrent();
+
+          let list = res.slice((curr - 1) * 16, curr * 16);
+
+          pageHtml(list);
+        }
+      });
+
       // 排序渲染
       $(".select-nva a").click(function () {
         $(this).addClass("active").siblings().removeClass("active");
 
         if ($(".select-nva a").eq(1).hasClass("active")) {
           res.sort((a, b) => a.money - b.money);
-          pageHtml();
+          pageHtml(res.slice(0, 16));
         } else if ($(".select-nva a").eq(2).hasClass("active")) {
           res.sort((a, b) => b.money - a.money);
-          pageHtml();
+          pageHtml(res.slice(0, 16));
         }
-
       });
 
       // 渲染页面
-      pageHtml();
-      function pageHtml() {
+      pageHtml(res.slice(0, 16));
+
+      function pageHtml(list) {
         var html = "";
-        res.forEach((item, index) => {
+        list.forEach((item, index) => {
           html += `        
           <li>
           <img src="${item.img}" alt="">
@@ -47,6 +63,7 @@ function initMain() {
         });
 
         $(".main-list").html(html);
+
       }
 
       // 给每个商品添加数据
@@ -66,7 +83,7 @@ function initMain() {
 
         listArr.forEach((item) => {
           if (item.id == $(this).parent().data("data-id")) {
-            item.num =  item.num + 1;
+            item.num = item.num + 1;
             flag = false;
           }
         });
@@ -79,17 +96,15 @@ function initMain() {
           num: $(this).parent().data("data-num")
         }
 
-        console.log(obj)
-        if(flag){
+        if (flag) {
           listArr.push(obj);
         }
-        
+
         localStorage.setItem("list", JSON.stringify(listArr));
       })
-
-
     }
   });
+
 }
 
 function initHeaderInfo() {

@@ -244,7 +244,7 @@ $color: #ff4040;
         height: 40px;
         line-height: 40px;
         cursor: pointer;
-        &:hover{
+        &:hover {
           color: $color;
         }
         &:nth-child(1) {
@@ -318,6 +318,7 @@ $color: #ff4040;
   border-top: 2px solid $color;
   .main-in {
     @include whc();
+    position: relative;
     .main-top {
       .main_crumb {
         height: 40px;
@@ -352,10 +353,10 @@ $color: #ff4040;
         dl {
           height: 34px;
           border-bottom: 1px solid #e5e5e5;
-          &:first-child{
+          &:first-child {
             height: 132px;
             border-bottom: 2px solid #e5e5e5;
-            dd{
+            dd {
               a {
                 width: 104px;
                 height: 52px;
@@ -367,7 +368,8 @@ $color: #ff4040;
                 color: #333;
                 float: left;
                 margin: 0;
-                &:first-child, &:nth-child(12){
+                &:first-child,
+                &:nth-child(12) {
                   border-left: 1px solid #e5e5e5;
                 }
                 img {
@@ -387,7 +389,6 @@ $color: #ff4040;
             color: #999;
             box-sizing: border-box;
             background: #f5f5f5;
-
           }
           dd {
             float: left;
@@ -395,10 +396,10 @@ $color: #ff4040;
             height: 100%;
             padding: 10px;
             box-sizing: border-box;
-            a{
+            a {
               color: #333;
               margin-right: 35px;
-              &:hover{
+              &:hover {
                 color: $color;
               }
             }
@@ -406,34 +407,34 @@ $color: #ff4040;
         }
       }
     }
-    .main-select{
+    .main-select {
       margin-top: 10px;
-      .select-nva{
+      .select-nva {
         height: 40px;
         line-height: 40px;
         background: #f5f5f5;
         border: 1px solid #ddd;
-        a{
+        a {
           display: inline-block;
           width: 60px;
           height: 100%;
           text-align: center;
           color: #333;
           border-right: 1px solid transparent;
-          &.active{
+          &.active {
             background: #fff;
             color: $color;
             border-right: 1px solid #ccc;
           }
         }
       }
-      .info{
+      .info {
         background: #fff;
-        div{
+        div {
           display: inline-block;
           width: 95px;
           margin-left: 20px;
-          input{
+          input {
             display: inline-block;
             width: 12px;
             border: none;
@@ -443,8 +444,9 @@ $color: #ff4040;
         }
       }
     }
-    .main-list{
-      li{
+    .main-list {
+      padding-bottom: 100px;
+      li {
         width: 165px;
         float: left;
         text-align: left;
@@ -452,24 +454,24 @@ $color: #ff4040;
         padding: 10px;
         margin-right: 10px;
         cursor: pointer;
-        img{
+        img {
           width: 184px;
           height: 184px;
         }
-        .money{
+        .money {
           color: #e60012;
           line-height: 30px;
           font-size: 18px;
           font-weight: bold;
-          b{
+          b {
             font-size: 14px;
           }
         }
-        .mainTitle{
+        .mainTitle {
           height: 34px;
           overflow: hidden;
         }
-        &>span{
+        & > span {
           display: block;
           width: 90px;
           height: 26px;
@@ -481,23 +483,23 @@ $color: #ff4040;
           margin-top: 5px;
           user-select: none;
         }
-        .pro{
+        .pro {
           line-height: 30px;
           color: #999;
-          i{
+          i {
             vertical-align: middle;
-            &:last-of-type{
+            &:last-of-type {
               color: #ff5c4d;
               margin-left: 8px;
             }
           }
-          span{
+          span {
             color: #ff5c4d;
           }
         }
-        .shop-text{
+        .shop-text {
           color: #999;
-          span{
+          span {
             display: inline-block;
             width: 26px;
             height: 12px;
@@ -508,76 +510,98 @@ $color: #ff4040;
             font-size: 12px;
             text-align: center;
             background: #fff8f8;
-
           }
         }
       }
-    } 
+    }
+    .M-box3 {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      a,
+      span {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        font-size: 16px;
+        background: #fafafa;
+        color: #999;
+        margin-right: 4px;
+      }
+      .active {
+        border: 1px solid #f2855f;
+        background: #ff8c64;
+        color: #fff;
+      }
+    }
   }
 }
 
 /* 底部导航区域 */
-.ft_wrap{
+.ft_wrap {
   height: 127px;
   background: #fff;
-  margin-top: 100px;
-  .ft-in{
+  .ft-in {
     @include whc();
     border-bottom: 1px solid #ccc;
     box-sizing: border-box;
     display: flex;
     justify-content: left;
     align-items: center;
-    li{
+    li {
       text-align: center;
       margin-right: 100px;
       display: flex;
-      &>div{
+      & > div {
         text-align: left;
         padding-top: 10px;
         margin-left: 10px;
-        p{
+        p {
           font-weight: bold;
           font-size: 16px;
           color: #333;
         }
-        span{
+        span {
           font-size: 14px;
           color: #999;
         }
       }
-
     }
   }
 }
 
 /* 底部区域 */
-.footer{
-  background:#fff;
-  .footer-in{
+.footer {
+  background: #fff;
+  .footer-in {
     @include whc();
     padding-top: 20px;
-    dl{
+    dl {
       width: 180px;
       float: left;
-      dt{
+      dt {
         font-weight: bold;
         color: #666;
         font-size: 14px;
         margin-bottom: 15px;
       }
-      dd{
+      dd {
         color: #666;
         line-height: 26px;
         cursor: pointer;
-        &:hover{
+        &:hover {
           color: $color;
         }
       }
     }
-    div{
+    div {
       margin-left: 50px;
-      h4{
+      h4 {
         color: #666;
         font-size: 14px;
         line-height: 32px;
@@ -586,11 +610,11 @@ $color: #ff4040;
     }
   }
 }
-.end{
+.end {
   padding-top: 20px;
   text-align: center;
   background: #fff;
-  p{
+  p {
     line-height: 26px;
   }
 }
