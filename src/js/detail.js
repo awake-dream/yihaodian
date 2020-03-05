@@ -5,8 +5,11 @@ $(function () {
     // 2. 初始化头部区域
     initHeaderInfo();
 
+    // 2.5 渲染数据 + 数据存储
+    initPageHtml();
+
     // 3. 初始化详情区域
-    initMain()
+    initMain();
 
     // 4.初始化选购区域
     initmainMlddle();
@@ -79,6 +82,62 @@ function initmainMlddle() {
     });
 }
 
+function initPageHtml() {
+
+    const info = JSON.parse(localStorage.getItem("goodsInfo"));
+    if (!info) {
+        alert("您要查看的数据不存在");
+        window.location.href = "./list.html";
+    }
+
+    // 渲染页面
+    bindHtml();
+    function bindHtml() {
+        $(".middleImg").attr('src', info.img);
+        $(".sub-list img").attr('src', info.img);
+        $(".box-bg img").attr('src', info.img);
+        $(".data-title").text(info.title);
+        $(".data-money").text(info.money);
+        $(".select-img").text(info.img);
+    }
+
+    $(".gouwuche").click(() => {
+
+        // 判断是否登录
+        const cartList = JSON.parse(localStorage.getItem("cartList")) || [];
+
+        let exits = cartList.some(item => {
+            return item.id === info.id
+        })
+
+        if (exits) {
+            let data = null;
+            for (let i = 0; i < cartList.length; i++) {
+                if (cartList[i].id === info.id) {
+                    data = cartList[i];
+                    break;
+                }
+            }
+
+            data.num = Number(data.num) + Number($(".num").text());
+
+            data.xiaoji = data.num * data.money;
+
+        } else {
+
+            info.num = $(".num").text();
+
+            info.xiaoji = info.money;
+            info.isSelect = false;
+
+            cartList.push(info);
+        }
+
+        localStorage.setItem("cartList", JSON.stringify(cartList));
+
+    });
+}
+
 function initMain() {
     var oMaskWidth = parseInt($(".mask").css("width"));
     var oMaskHeight = parseInt($(".mask").css("height"));
@@ -124,10 +183,10 @@ function initMain() {
         $(".box-bg").hide();
     });
 
-    $(".sub-list li").mouseenter(function () {
-        $(".middleImg").prop("src", `../images/${$(this).index() + 1}_2.jpeg`);
-        $(".bigImg").prop("src", `../images/${$(this).index() + 1}_3.jpeg`);
-    });
+    // $(".sub-list li").mouseenter(function () {
+    //     $(".middleImg").prop("src", `../images/${$(this).index() + 1}_2.jpeg`);
+    //     $(".bigImg").prop("src", `../images/${$(this).index() + 1}_3.jpeg`);
+    // });
 }
 
 function initHeaderInfo() {

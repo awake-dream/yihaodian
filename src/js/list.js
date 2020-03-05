@@ -5,107 +5,116 @@ $(function () {
   // 2.初始化头部菜单区域
   initHeaderInfo();
 
+
   // 3.初始化列表区域
   initMain();
 
 });
 
 function initMain() {
-  $.ajax({
-    url: "../data/Llist.json",
-    type: "GET",
-    success: function (res) {
-      $('.M-box3').pagination({
-        pageCount: Math.ceil(res.length / 16),
-        jump: true,
-        coping: true,
-        homePage: '首页',
-        endPage: '末页',
-        prevContent: '上页',
-        nextContent: '下页',
-        callback: function (api) {
-          let curr = api.getCurrent();
+  let flag = true;
 
-          let list = res.slice((curr - 1) * 16, curr * 16);
+  getList();
+  function getList() {
+    $.ajax({
+      url: "../data/Llist.json",
+      type: "GET",
+      success: function (res) {
 
-          pageHtml(list);
+        pageSort(res);
+        
+        bindHtml(res.slice(0, 16));
+
+        flag && bindPagi(res);
+
+        addCart(res);
+      }
+    })
+  }
+    
+
+  // 排序渲染
+  function pageSort(res) {
+
+    $(".select-nva a").click(function () {
+      $(this).addClass("active").siblings().removeClass("active")
+
+
+      res.sort(function (a, b) {
+        if($(".select-nva a").eq(1).hasClass("active")){
+          return a.money - b.money;
+        }else if($(".select-nva a").eq(2).hasClass("active")){
+          return b.money - a.money;
         }
       });
 
-      // 排序渲染
-      $(".select-nva a").click(function () {
-        $(this).addClass("active").siblings().removeClass("active");
+      bindHtml(res.slice(0, 16));
+    });
 
-        if ($(".select-nva a").eq(1).hasClass("active")) {
-          res.sort((a, b) => a.money - b.money);
-          pageHtml(res.slice(0, 16));
-        } else if ($(".select-nva a").eq(2).hasClass("active")) {
-          res.sort((a, b) => b.money - a.money);
-          pageHtml(res.slice(0, 16));
+  }
+
+  // 渲染页面
+  function bindHtml (list) {
+    let str = "";
+    list.forEach((item) => {
+      str += `        
+      <li data-id="${item.id}">
+      <img src="${item.img}" alt="">
+      <p class="money"> <b>¥</b>${item.money}</p>
+      <p class="mainTitle">${item.title}</p>
+      <span>查看详情</span>
+      <p class="pro"><i class="iconfont icon-duihuakuang"></i>暂无评论 <i class="iconfont icon-dianzan"> </i> <span>${getRandomInt(60, 100)}%</span></p>
+      <p class="shop-text"><span>自营</span> 谷高数码手机专营店 </p>
+      </li>`;
+    });
+
+    $(".main-list").html(str);
+  }
+
+  // 分页器
+  function bindPagi (res) {
+    flag = false;
+    
+    $('.M-box3').pagination({
+      pageCount: Math.ceil(res.length / 16),
+      jump: true,
+      coping: true,
+      homePage: '首页',
+      endPage: '末页',
+      prevContent: '上页',
+      nextContent: '下页',
+      callback: function (api) {
+        let curr = api.getCurrent();
+
+        let list = res.slice((curr - 1) * 16, curr * 16);
+
+        bindHtml(list);
+      }
+    });
+  }
+
+  // 存储数据 + 跳转页面
+  function addCart (res) {
+    $(".main-list").on("click", "li", function () {
+      const id = $(this).data("id");
+
+      let data = null;
+      for(let i = 0; i < res.length;i++){
+        if(res[i].id == id){
+          data = res[i];
+          break;
         }
-      });
-
-      // 渲染页面
-      pageHtml(res.slice(0, 16));
-
-      function pageHtml(list) {
-        var html = "";
-        list.forEach((item, index) => {
-          html += `        
-          <li>
-          <img src="${item.img}" alt="">
-          <p class="money"> <b>¥</b>${item.money}</p>
-          <p class="mainTitle">${item.title}</p>
-          <span>加入购物车</span>
-          <p class="pro"><i class="iconfont icon-duihuakuang"></i>暂无评论 <i class="iconfont icon-dianzan"> </i> <span>${getRandomInt(60, 100)}%</span></p>
-          <p class="shop-text"><span>自营</span> 谷高数码手机专营店 </p>
-          </li>`;
-        });
-
-        $(".main-list").html(html);
-
       }
 
-      // 给每个商品添加数据
-      $(".main-list li").each(function (index, ele) {
-        $(this).data("data-id", index);
-        $(this).data("data-img", $(this).children("img").prop("src"));
-        $(this).data("data-money", $(this).children(".money").text().replace("¥", ""));
-        $(this).data("data-info", $(this).children(".mainTitle").text());
-        $(this).data("data-num", 0);
-      })
+      localStorage.setItem("goodsInfo", JSON.stringify(data));
 
+      window.location.href = './detail.html';
+    })
 
-      // 在用户点击 加入购物车 将数据在 localStorage 保存下来
-      $(".main-list li span").click(function () {
-        var listArr = JSON.parse(localStorage.getItem("list") || "[]");
-        var flag = true;
-
-        listArr.forEach((item) => {
-          if (item.id == $(this).parent().data("data-id")) {
-            item.num = item.num + 1;
-            flag = false;
-          }
-        });
-
-        var obj = {
-          id: $(this).parent().data("data-id"),
-          img: $(this).parent().data("data-img"),
-          money: $(this).parent().data("data-money"),
-          info: $(this).parent().data("data-info"),
-          num: $(this).parent().data("data-num")
-        }
-
-        if (flag) {
-          listArr.push(obj);
-        }
-
-        localStorage.setItem("list", JSON.stringify(listArr));
-      })
-    }
-  });
+  }
 
 }
+
 
 function initHeaderInfo() {
   $.ajax({

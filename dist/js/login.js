@@ -1,1 +1,1 @@
-"use strict";
+"use strict";$(function(){var n=function(t){for(var n="23QWERTYUIOPASDFGHJKLZXCVBNM1456789zxcvbnmasdfghjklqwertyuiop",a="",r=0;r<t;r++)a+=n[Math.floor(Math.random()*n.length)];return a}(4);$(".rand").text(n),$(".model").submit(function(t){$(".yzm input").val()===n&&$(".pwd1").val()===$(".pwd2").val()||t.preventDefault()})});

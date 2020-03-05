@@ -367,6 +367,10 @@ $color: #ff4040;
             position: relative;
             li {
               cursor: pointer;
+              img{
+                width: 54px;
+                height: 54px;
+              }
             }
             i {
               @include v-position();
@@ -396,6 +400,8 @@ $color: #ff4040;
           display: none;
           img {
             position: absolute;
+            width: 800px;
+            height: 800px;
           }
         }
       }
@@ -405,19 +411,6 @@ $color: #ff4040;
           font-size: 16px;
           padding-top: 10px;
           margin-bottom: 10px;
-          span {
-            font-size: 12px;
-            background-color: #ffefef;
-            color: #f66;
-            border: 1px solid #f3a3ad;
-            margin-right: 8px;
-            width: 30px;
-            height: 16px;
-            line-height: 14px;
-            display: inline-block;
-            text-align: center;
-            font-weight: bold;
-          }
         }
         .price {
           height: 28px;
@@ -508,6 +501,8 @@ $color: #ff4040;
                 }
                 img {
                   vertical-align: middle;
+                  width: 30px;
+                  height: 30px;
                 }
                 b {
                   font-weight: normal;
