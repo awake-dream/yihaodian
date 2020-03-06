@@ -101,9 +101,19 @@ function initPageHtml() {
         $(".select-img").text(info.img);
     }
 
-    $(".gouwuche").click(() => {
+    
 
-        // 判断是否登录
+
+    $(".gouwuche").click(() => {
+        // 判断是否登录 
+        let listArr = JSON.parse(localStorage.getItem("initInfo")) || [];
+
+        if(listArr.length === 0){
+            alert("您当前未登录, 正在跳转登录页面...");
+            window.location.href = "../pages/req.html"
+            return;
+        }
+
         const cartList = JSON.parse(localStorage.getItem("cartList")) || [];
 
         let exits = cartList.some(item => {

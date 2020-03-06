@@ -23,7 +23,30 @@ $(function () {
   // 6. 初始化楼层区域
   initSingle();
 
+
+  // 7.初始化跳转事件
+  initLocation();
+
+
 });
+
+function initLocation(){
+  $(".home-list").on("click", "li", function () {
+    window.location.href = "../pages/list.html";
+  });
+
+
+
+  let listArr = JSON.parse(localStorage.getItem("initInfo")) || [];
+
+  if(listArr.length !== 0){
+    $(".goods_info").text("晚上好, " + listArr.username);
+  }
+
+  $(".zc").click( () => {
+    window.location.href = "../pages/login.html"
+  });
+}
 
 function initSingle() {
   $.ajax({
@@ -211,6 +234,7 @@ function initCategory() {
     }
   });
 }
+
 
 /*
   遍历 res

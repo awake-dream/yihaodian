@@ -1,4 +1,31 @@
 $(function () {
+    let res = mkLinks(4);
+
+    $(".rand").text(res);
+
+    $(".submit").click(function () {
+        let num = $(".yzm input").val();
+
+        if(num !== res || $(".pwd1").val() !== $(".pwd2").val() || $(".pwd1").val().trim() == "" ) {
+            return;
+        } 
+
+        $.post('/cc', {
+            username: $(".name").val(), 
+            userphone: $(".phone").val(),
+            userpowd: $(".pwd1").val()
+        }, function (res) {
+            alert("注册成功");
+            $(".name").val(" ");
+            $(".phone").val(" ");
+            $(".yzm input").val(" ");
+            $(".pwd1").val(" ");
+            $(".pwd2").val(" ");
+        });
+    });
+
+
+
     function mkLinks(num) {
         var str = "23QWERTYUIOPASDFGHJKLZXCVBNM1456789zxcvbnmasdfghjklqwertyuiop";
         var res = '';
@@ -7,24 +34,6 @@ $(function () {
         }
         return res;
     }
-
-    let res = mkLinks(4);
-
-    $(".rand").text(res);
-
-
-    $(".model").submit(function (event) {
-        let num = $(".yzm input").val();
-
-        if(num !== res || $(".pwd1").val() !== $(".pwd2").val()) {
-            
-            event.preventDefault();
-        } 
-
-
-
-    });
-
 
 
 });

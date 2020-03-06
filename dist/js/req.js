@@ -1,0 +1,1 @@
+"use strict";$(function(){$(".submit").click(function(){var t=$(".zh").val(),n=$(".mm").val();$.get("/dd",{username:t,password:n},function(t){t?(localStorage.setItem("initInfo",JSON.stringify(t)),window.location.href="../pages/index.html"):alert("账号或密码错误")},"json")})});

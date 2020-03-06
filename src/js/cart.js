@@ -1,6 +1,6 @@
 $(function () {
 
-  const cartList = JSON.parse(localStorage.getItem("cartList"));
+  var cartList = JSON.parse(localStorage.getItem("cartList"));
 
   if (cartList.length === 0) {
     $('.hide').show();
@@ -10,6 +10,7 @@ $(function () {
     bindHtml();
 
     bindEvent();
+  
   }
 
   function bindHtml() {
@@ -59,7 +60,7 @@ $(function () {
     </div>
   </div>`
 
-
+    // 你这里渲染页面使用的是 cartList 对吧? 这个能理解吧
     cartList.forEach(item => {
       str += `
     <div class="cart">
@@ -102,7 +103,7 @@ $(function () {
   
             <div class="amount fl">
               <div class="money">
-                ${item.xiaoji.toFixed(2)}
+                ${item.xiaoji}
               </div>
               <div class="weight">
                 1.00kg
@@ -119,7 +120,7 @@ $(function () {
   
           <div class="cart-amount">
             商品总价格 : 
-            <span>${item.xiaoji.toFixed(2)}</span>
+            <span>${item.xiaoji}</span>
           </div>
   
         </div>
@@ -231,16 +232,46 @@ $(function () {
       localStorage.setItem("cartList", JSON.stringify(cartList));
     });
 
-    // 点击删除的事件
+    // 点击删除的事件  
     $(".main").on('click', ".del", function () {
       const id = $(this).data("id");
+      // 遇到问题要思考 ? 
+      // 你这里获取的是元素身上的 data-id 属性
+      //  刚才你检查元素的时候也看到了, 拿到的是 undefined
+      //  你查看代码的时候也看了, 使用的是 item.id 这个数据绑定的
+      // 那么问题出在了那里呢 ? 是不是就是说明 item.id 是一个 undefined
+      // 那么就说明你的数据里面就没有 id 这一项啊 ? 明白吗
 
-      $(this).parents(".cart").remove();
+      // 你为什么要移除 DOM 结构呢 ?
+      // 因为我想看到效果
+      // 那你点击 + 的时候, 为什么不找到元素, 让它的 val() + 1 呢 ?
+      // $(this).parents(".cart").remove();
 
-      let listArr = cartList.filter(item => item.id != id);
+      // 你想删除, 对吧, 然后你用了一个 filter 方法
+      // 那么你的 listArr 就是删除一条数据的数组, 可是你的 cartList 没有改变 ? 明白吗
+      // var listArr = cartList.filter(item => item.id != id);
+      // 你现在做的删除是没有改变 cartList 对吧, 所以从新执行 bindHtml 不会改变页面
+      // 如果你删除的时候是改变了 cartList 的话, 那么你从新执行 bindHtml 页面不久变了
+      // 咋办 ?
 
-      localStorage.setItem('cartList', JSON.stringify(listArr));
+        // cartList.forEach(function (item) {
+        //   if(item.id == id){
+        //     console.log(item) 
+        //   }
+        // })
+        // 可算是开窍了 ?
+        // 注意:  如果你的 cartList 是使用 const 定义的, 是不是就不能改啊 ?懂
+        // 那我要去上面 var 吗 ? 对啊 
+        cartList = cartList.filter(item => item.id != id)
+        // 谢谢老师
+        // console.log(listArr)
 
+      // 你这里只是把新的数组从新存储在 localStorage 里面
+      // 你并没有说渲染页面的时候使用新数组啊
+      localStorage.setItem('cartList', JSON.stringify(cartList));
+
+      // 你一执行 bindHtml, 这个函数还是在使用 cartList 在渲染页面啊  明白吗 ?
+      bindHtml()
     })
     
 

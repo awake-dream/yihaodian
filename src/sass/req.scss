@@ -1,0 +1,167 @@
+/*工具类*/
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.clearfix::after {
+  /*设置添加的子元素的内容为空*/
+  content: "";
+  /*设置添加的子元素为块级元素*/
+  display: block;
+  /*设置添加的子元素的高度为0*/
+  height: 0;
+  /*设置添加的子元素看不见*/
+  visibility: hidden;
+  /*给添加的子元素设置clear: both;*/
+  clear: both;
+}
+.clearfix {
+  /*兼容IE6*/
+  *zoom: 1;
+}
+@mixin whc() {
+  width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+}
+@mixin down($w, $c) {
+  width: 0;
+  height: 0;
+  border: $w solid transparent;
+  border-top-color: $c;
+  vertical-align: middle;
+}
+@mixin v-position() {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+@mixin h-position() {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+html,
+body {
+  font-size: 12px;
+  color: #333;
+  background: #fcfcfc;
+}
+img {
+  vertical-align: top;
+}
+/* 头部区域 */
+.header {
+  height: 80px;
+  border: 1px solid #e1e1e1;
+  .header-in {
+    @include whc();
+    padding-top: 20px;
+    box-sizing: border-box;
+    h1 {
+      float: left;
+    }
+    .header-right {
+      a {
+        color: #333;
+        float: right;
+        &:nth-of-type(2) {
+          color: #06c;
+          margin: 0 30px 0 15px;
+        }
+      }
+      p {
+        float: right;
+        color: #999;
+      }
+    }
+  }
+}
+
+/* 登录区域 */
+.main {
+  padding-top: 40px;
+  .wrap {
+    width: 980px;
+    margin: 0 auto;
+    .login {
+      width: 400px;
+      background: #fff;
+      padding: 35px 26px 0 45px;
+      box-sizing: border-box;
+      .title {
+        height: 30px;
+        line-height: 30px;
+        h2 {
+          float: left;
+          font-size: 14px;
+          color: #666;
+          font-weight: bold;
+        }
+        & > a {
+          float: right;
+          color: #06c;
+          &:hover{
+            color: #f60;
+          }
+        }
+      }
+      &>input{
+        width: 330px;
+        height: 54px;
+        padding-left: 10px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+        outline: none;
+        background: #fff;
+      }
+      .select{
+        display: flex;
+        justify-content: space-between;
+        p{
+          &>input{
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: none;
+            outline: none;
+            vertical-align: middle;
+          }
+          &>a{
+            color: #999;
+          }
+        }
+        &>a{
+          color:#999;
+        }
+      }
+      button{
+        margin-top: 20px;
+        width: 330px;
+        height: 52px;
+        line-height: 52px;
+        text-align: center;
+        color: #fff;
+        background: #ff3c3c;
+        border:none;
+        outline: none;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 3px;
+      }
+      &>p{
+        line-height: 50px;
+        color: #666;
+      }
+    }
+  }
+  &>p{
+    text-align: center;
+    &:nth-of-type(1){
+      padding-top: 20px;
+      height: 30px;
+    }
+  }
+}
