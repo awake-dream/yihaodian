@@ -19,4 +19,9 @@ $(function () {
     });
 
 
+    $(".goods_zc").click(function () {
+        window.location.href = "../pages/login.html";
+    });
+
+
 });

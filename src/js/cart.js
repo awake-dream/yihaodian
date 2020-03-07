@@ -2,7 +2,7 @@ $(function () {
 
   var cartList = JSON.parse(localStorage.getItem("cartList"));
 
-  if (cartList.length === 0) {
+  if (!cartList) {
     $('.hide').show();
 
   } else {
@@ -277,15 +277,19 @@ $(function () {
 
     // 全部清空
     $(".main").on("click", ".all-del", function () {
-      $(".cart").remove();
+      cartList = [];
+      localStorage.setItem('cartList', JSON.stringify(cartList));
 
-      $(".res").text("0");
-      $(".goods_num").text("0");
-      $(".total").text("0.00");
-
-      localStorage.setItem('cartList', JSON.stringify([]));
-
+      bindHtml()
     });
 
   }
+
+
+  let listArr = JSON.parse(localStorage.getItem("initInfo")) || [];
+
+  if(listArr.length !== 0){
+    $(".goods_info").text("晚上好, " + listArr.username);
+  }
+
 });

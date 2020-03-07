@@ -167,7 +167,10 @@ $color: #ff4040;
             width: 700px;
             height: 40px;
             line-height: 40px;
-            border: 2px solid #ff4040;
+            text-align: left;
+            border: 2px solid #ff4040{
+              right: none;
+            };
             outline: none;
             border-top-left-radius: 100px;
             border-bottom-left-radius: 100px;

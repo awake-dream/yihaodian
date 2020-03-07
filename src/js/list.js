@@ -5,9 +5,14 @@ $(function () {
   // 2.初始化头部菜单区域
   initHeaderInfo();
 
-
   // 3.初始化列表区域
   initMain();
+
+  let listArr = JSON.parse(localStorage.getItem("initInfo")) || [];
+
+  if(listArr.length !== 0){
+    $(".goods_info").text("晚上好, " + listArr.username);
+  }
 
 });
 

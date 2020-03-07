@@ -16,6 +16,17 @@ $(function () {
 
     // 5.初始化右边随机菜单
     initRandom();
+
+    let listArr = JSON.parse(localStorage.getItem("initInfo")) || [];
+
+    if(listArr.length !== 0){
+      $(".goods_info").text("晚上好, " + listArr.username);
+    }
+
+    $(".goods_cart").click( () => {
+        window.location.href = "../pages/cart.html";
+    });
+
 });
 
 

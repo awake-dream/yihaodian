@@ -16,12 +16,14 @@ $(function () {
             userpowd: $(".pwd1").val()
         }, function (res) {
             alert("注册成功");
-            $(".name").val(" ");
-            $(".phone").val(" ");
-            $(".yzm input").val(" ");
-            $(".pwd1").val(" ");
-            $(".pwd2").val(" ");
+
+            history.go(0);
         });
+    });
+
+    
+    $(".goods_denglu").click(function () {
+        window.location.href = "../pages/req.html";
     });
 
 
